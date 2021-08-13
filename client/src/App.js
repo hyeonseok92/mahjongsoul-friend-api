@@ -1,20 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { User } from 'dto'
 
-class App extends Component {
-  state = {
-    data: null
-  };
-
-  componentDidMount() {
-    this.callBackendAPI()
-      .then(res => this.setState({ data: res }))
-      .catch(err => console.log(err));
+const styles = {
+  root: {
+    width: '100%',
+    height: '100%',
   }
+}
+const useStyles = makeStyles(styles);
+
+const App = () => {
+  const [data, setData] = React.useState();
+  React.useEffect(() => {
+    callBackendAPI()
+      .then(res => setData(res))
+      .catch(err => console.log(err));
+  }, [])
 
   // fetching the GET route from the Express server which matches the GET route from server.js
-  callBackendAPI = async () => {
+  const callBackendAPI = async () => {
     const resUsers = await fetch('/api/user');
     const resEastStats = await fetch('/api/stat/east');
     const resSouthStats = await fetch('/api/stat/south');
@@ -27,20 +32,28 @@ class App extends Component {
     const eastStats = await resEastStats.json();
     const southStats = await resSouthStats.json();
 
-    return [users, eastStats, southStats];
+    console.log(eastStats)
+
+    return {
+      users: users.map(v=>new User(v)), 
+      eastStats, 
+      southStats};
   };
 
-  render() {
-    return (
-      <div className="App">
-        <p className="App-intro">{JSON.stringify(this.state.data)}</p>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-      </div>
-    );
-  }
+  console.log(data && data.users)
+
+  return (
+    <>
+    {
+      data !== undefined && (
+        <div className="App">
+          <p className="App-intro">{data.users.map(u => <div>{u.nickname} - {u.name}</div>)}</p>
+          <p className="App-intro">{JSON.stringify(data.eastStats)}</p>
+          <p className="App-intro">{JSON.stringify(data.southStats)}</p>
+        </div>)
+    }
+    </>
+  );
 }
 
 export default App;
