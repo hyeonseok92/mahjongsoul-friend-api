@@ -1,0 +1,21 @@
+{
+  "name": "mahjongsoul-friend-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hyeonseok",
+  "license": "MIT",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "express": "^4.17.1",
+    "protobufjs": "^6.8.8",
+    "request-promise": "^4.2.4",
+    "sqlite3": "^5.0.2",
+    "uuid": "^3.3.3",
+    "ws": "^7.1.2"
+  }
+}

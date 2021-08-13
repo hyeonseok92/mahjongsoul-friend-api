@@ -1,0 +1,20 @@
+const FRIEND_ACCOUNTS = 
+  [
+    {
+      account_id: 12341234,
+      nickname: "nickname",
+      name: "Alice"
+    },
+    {
+      account_id: 12341235,
+      nickname: "nickname",
+      name: "Bob"
+    },
+    {
+      account_id: 12341236,
+      nickname: "nickname",
+      name: "Charlie"
+    },
+];
+
+module.exports = FRIEND_ACCOUNTS

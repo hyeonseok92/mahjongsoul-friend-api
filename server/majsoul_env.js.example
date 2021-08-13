@@ -1,0 +1,7 @@
+module.exports = {
+	ACCESS_TOKEN: "access token",
+	UID: "uid",
+	URL_BASE: "https://game.mahjongsoul.com/",
+	OAUTH_TYPE: 7,
+};
+
