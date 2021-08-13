@@ -32,25 +32,18 @@ const App = () => {
     const eastStats = await resEastStats.json();
     const southStats = await resSouthStats.json();
 
-    console.log(eastStats)
+    const userData = []
+    for(let i = 0; i<users.length; ++i) {
+      userData.push(new User(users[i], eastStats[i], southStats[i]))
+    }
 
-    return {
-      users: users.map(v=>new User(v)), 
-      eastStats, 
-      southStats};
+    return userData
   };
-
-  console.log(data && data.users)
 
   return (
     <>
     {
-      data !== undefined && (
-        <div className="App">
-          <p className="App-intro">{data.users.map(u => <div>{u.nickname} - {u.name}</div>)}</p>
-          <p className="App-intro">{JSON.stringify(data.eastStats)}</p>
-          <p className="App-intro">{JSON.stringify(data.southStats)}</p>
-        </div>)
+      data !== undefined && data.map(u => <div key={u.account_id}>{u.nickname} - {u.name} - {u.match_east.game_count_sum} - {u.match_south.game_count_sum}</div>)
     }
     </>
   );

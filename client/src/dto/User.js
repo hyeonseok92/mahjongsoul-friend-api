@@ -1,11 +1,15 @@
+import Match from './Match'
+
 class User {
-    constructor(data) {
-       this.account_id = data.account_id
-       this.level4_rank = data.level4_rank
-       this.level4_score= data.level4_score
-       this.name = data.name
-       this.nickname = data.nickname
-       this.signature = data.signature
+    constructor(userData, eastStats, SouthStats) {
+       this.account_id = userData.account_id
+       this.level4_rank = userData.level4_rank
+       this.level4_score= userData.level4_score
+       this.name = userData.name
+       this.nickname = userData.nickname
+       this.signature = userData.signature
+       this.match_east = new Match(eastStats)
+       this.match_south = new Match(SouthStats)
     }
 }
 
